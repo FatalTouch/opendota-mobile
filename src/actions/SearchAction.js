@@ -18,15 +18,17 @@ export const receiveSearchEmpty = () => (
   { type: RECEIVE_SEARCH_EMPTY }
 );
 
-export default playerName => ((dispatch) => {
+export default (playerName, cb) => ((dispatch) => {
   dispatch(requestSearch());
   return api.searchPlayers(playerName).then((data) => {
-    console.log(data);
     if (data.length === 0) {
       dispatch(receiveSearchEmpty());
     } else {
       // const results = data.slice(0, 40); // Take only first 40 results
       dispatch(receiveSearchResults(data));
+      if (typeof cb === 'function') {
+        cb();
+      }
     }
   }).catch((error) => {
     console.log(`Action - FETCH PLAYERS ERROR - ${error}`);

@@ -15,9 +15,8 @@ class Home extends Component {
   }
 
   searchPlayer = () => {
-    this.props.actions.search(this.state.searchInput);
+    this.props.actions.search(this.state.searchInput, () => this.props.navigation.navigate('searchresult'));
     console.log(this.props);
-    this.props.navigation.navigate('searchresult');
   };
 
   isLoading() {
