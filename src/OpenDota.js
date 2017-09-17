@@ -1,16 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './stores';
+import Router from './Router';
 
-const Opendota = () => {
-  return (
-    <Provider store={store}>
-      <View>
-        <Text>Open dota App</Text>
-      </View>
-    </Provider>
-  );
-};
+const Opendota = () => (
+  <Provider store={store}>
+    <Router />
+  </Provider>
+);
 
 export default Opendota;
