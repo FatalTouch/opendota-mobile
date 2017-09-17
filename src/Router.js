@@ -9,10 +9,14 @@ import React from 'react';
 import { View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import HomeScreen from './components/screens/Home';
+import SearcResultScreen from './components/screens/SearchResult';
 
 const MainNavigator = StackNavigator({
   home: {
     screen: HomeScreen
+  },
+  searchresult: {
+    screen: SearcResultScreen
   }
 }, {
   headerMode: 'none'
