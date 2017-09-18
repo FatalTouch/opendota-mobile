@@ -27,9 +27,6 @@ const MatchCard = (props) => {
     centerTextStyle
   } = styles;
 
-  console.log(heroList);
-  console.log(gameModeList);
-
   const matchMinutes = (duration / 60).toFixed();
   const matchSeconds = (duration % 60);
   const heroName = heroList[hero_id].localized_name;

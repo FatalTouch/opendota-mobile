@@ -9,19 +9,13 @@ import MatchCard from '../partials/MatchCard';
 class RecentMatches extends Component {
 
 
-  static renderRow(data, sectionId, rowId) {
+  static renderRow(data) {
     const styles = [{ backgroundColor: 'hsla(0,0%,100%,.019)' }, { backgroundColor: 'rgba(0,0,0,.019)' }]
-    return <MatchCard match={data.item} rowStyle={styles[rowId % styles.length]} />;
+    return <MatchCard match={data.item} rowStyle={styles[data.index % styles.length]} />;
   }
 
-  constructor(props) {
-    super(props);
-    console.log(props);
+  componentDidMount() {
     this.props.actions.getMatchList(this.props.navigation.state.params.accountId);
-  }
-
-  componentWillUnmount() {
-    console.log('called');
   }
 
   isFetching() {
