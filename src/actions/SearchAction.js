@@ -32,5 +32,6 @@ export default (playerName, cb) => ((dispatch) => {
     }
   }).catch((error) => {
     console.log(`Action - FETCH PLAYERS ERROR - ${error}`);
+    dispatch(receiveSearchEmpty());
   });
 });

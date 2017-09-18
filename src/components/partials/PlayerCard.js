@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 
 const PlayerCard = (props) => {
   const { personaname, avatarfull, account_id, last_match_time } = props.player;
   const { containerStyle, avatarStyle, textContainerStyle, lastPlayedText, accountIdText } = styles;
   return (
-    <TouchableWithoutFeedback>
+    <TouchableOpacity onPress={props.onPress}>
       <View style={containerStyle}>
         <Image style={avatarStyle} source={{ uri: avatarfull }} />
         <View style={textContainerStyle}>
@@ -17,7 +17,7 @@ const PlayerCard = (props) => {
           </Text>
         </View>
       </View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   );
 };
 

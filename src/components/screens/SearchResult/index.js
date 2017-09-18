@@ -5,10 +5,6 @@ import PlayerCard from '../../partials/PlayerCard';
 
 class SearchResults extends Component {
 
-  static renderRow(data) {
-    return <PlayerCard player={data.item} />;
-  }
-
   renderSeparator = () => (
     <View
       style={{
@@ -20,13 +16,20 @@ class SearchResults extends Component {
     />
   );
 
+  _handlePress = (account_id) => {
+    console.log('clicked');
+    this.props.navigation.navigate('profile', { accountId: account_id });
+  };
+
+  _renderItem = ({ item }) => <PlayerCard player={item} onPress={() => this._handlePress(item.account_id)} />;
+
+
   render() {
     return (
       <View style={styles.container}>
         <FlatList
-          removeClippedSubViews={false}
           data={this.props.searchResult}
-          renderItem={SearchResults.renderRow}
+          renderItem={this._renderItem}
           keyExtractor={item => item.account_id}
           ItemSeparatorComponent={this.renderSeparator}
         />

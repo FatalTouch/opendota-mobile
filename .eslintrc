@@ -21,6 +21,7 @@
     "linebreak-style": "off",
     "no-throw-literal": "off",
     "global-require": "off",
+    "camelcase":"off",
     "no-underscore-dangle": [
       "error",
       {

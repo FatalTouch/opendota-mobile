@@ -7,9 +7,16 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import HomeScreen from './components/screens/Home';
 import SearcResultScreen from './components/screens/SearchResult';
+import MatchesScreen from './components/screens/Matches';
+
+const ProfileScreen = TabNavigator({
+  matches: {
+    screen: MatchesScreen
+  }
+});
 
 const MainNavigator = StackNavigator({
   home: {
@@ -17,6 +24,9 @@ const MainNavigator = StackNavigator({
   },
   searchresult: {
     screen: SearcResultScreen
+  },
+  profile: {
+    screen: ProfileScreen
   }
 }, {
   headerMode: 'none'
