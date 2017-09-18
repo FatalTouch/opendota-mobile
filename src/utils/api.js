@@ -5,12 +5,18 @@ const apiUrl = 'https://api.opendota.com/api/';
 const fetchFromApi = endpoint => axios.get(apiUrl + endpoint).then(response => response.data);
 
 // Constants to be used in various endpoints
-const recentMatchLimit = 30;
+const matchLimit = 30;
 
 class Api {
   searchPlayers = text => fetchFromApi(`search?q=${text}&similarity=0.9`);
 
-  getRecentMatches = accountId => fetchFromApi(`players/${accountId}/matches?limit=${recentMatchLimit}`);
+  // getRecentMatches = accountId => fetchFromApi(`players/${accountId}/matches?limit=${matchLimit}`);
+
+  getMatches = (accountId, page) => {
+    console.log(accountId, page);
+    const offset = page * matchLimit;
+    return fetchFromApi(`players/${accountId}/matches?limit=${matchLimit}&offset=${offset}`);
+  };
 }
 
 

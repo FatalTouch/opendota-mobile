@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
-
+import moment from 'moment';
 import { heroes as heroList, game_mode as gameModeList } from 'dotaconstants/mobile';
 
 import getHeroImage from '../../utils/getHeroImage';
@@ -14,7 +14,8 @@ const MatchCard = (props) => {
     hero_id,
     duration,
     radiant_win,
-    game_mode
+    game_mode,
+    start_time
   } = props.match;
 
   const {
@@ -27,7 +28,7 @@ const MatchCard = (props) => {
     centerTextStyle
   } = styles;
 
-  const matchMinutes = (duration / 60).toFixed();
+  const matchMinutes = Math.floor(duration / 60);
   const matchSeconds = (duration % 60);
   const heroName = heroList[hero_id].localized_name;
   const matchDuration = `${matchMinutes}:${(matchSeconds < 10 ? `0${matchSeconds}` : matchSeconds)}`;
@@ -36,20 +37,23 @@ const MatchCard = (props) => {
     ? 'Win' : 'Loss');
   const resultColor = result === 'Win' ? '#66bb6a' : '#ff4c4c';
   const gameMode = gameModeList[game_mode].localized_name;
+  const endTime = moment.unix(start_time + duration).fromNow();
+
   return (
     <TouchableWithoutFeedback>
       <View style={[containerStyle, props.rowStyle]}>
         <Image style={avatarStyle} source={getHeroImage(hero_id)} />
-        <View style={[textContainerStyle, { flex: 1.9 }]}>
+        <View style={[textContainerStyle, { flex: 2 }]}>
           <Text style={heroNameStyle}>{heroName}</Text>
           <Text style={subTextStyle}>{`${playerTeam} - ${gameMode}`}</Text>
         </View>
-        <View style={[textContainerStyle, { flex: 1.1 }]}>
+        <View style={[textContainerStyle, { flex: 1.4 }]}>
           <Text style={[mainTextStyle, centerTextStyle]}>{matchDuration}</Text>
-          <Text style={[subTextStyle, centerTextStyle, { color: resultColor }]}>{result}</Text>
+          <Text style={[subTextStyle, centerTextStyle]}>{endTime}</Text>
         </View>
         <View style={[textContainerStyle, { flex: 1 }]}>
-          <Text style={mainTextStyle}>{`${kills}/${deaths}/${assists}`}</Text>
+          <Text style={[mainTextStyle, centerTextStyle]}>{`${kills}/${deaths}/${assists}`}</Text>
+          <Text style={[subTextStyle, centerTextStyle, { color: resultColor }]}>{result}</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
