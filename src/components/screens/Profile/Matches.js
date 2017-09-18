@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { View, FlatList, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import getMatchList, { clearMatchList } from '../../actions/MatchAction';
+import getMatchList, { clearMatchList } from '../../../actions/MatchAction';
 
-import MatchCard from '../partials/MatchCard';
+import MatchCard from '../../partials/MatchCard';
 
 class RecentMatches extends Component {
   static renderItem(data) {
@@ -14,7 +14,7 @@ class RecentMatches extends Component {
 
   componentDidMount() {
     this.props.actions.clearMatchList();
-    this.props.actions.getMatchList(this.props.navigation.state.params.accountId, 0);
+    this.props.actions.getMatchList(this.props.accountId, 0);
   }
 
   isFetching() {
@@ -26,7 +26,7 @@ class RecentMatches extends Component {
 
   loadMatchList = () => {
     if (!this.props.isFetching) {
-      this.props.actions.getMatchList(this.props.navigation.state.params.accountId, this.props.page);
+      this.props.actions.getMatchList(this.props.accountId, this.props.page);
     }
   };
 

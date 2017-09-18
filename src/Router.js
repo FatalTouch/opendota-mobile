@@ -7,16 +7,10 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 import HomeScreen from './components/screens/Home';
 import SearcResultScreen from './components/screens/SearchResult';
-import MatchesScreen from './components/screens/Matches';
-
-const ProfileScreen = TabNavigator({
-  matches: {
-    screen: MatchesScreen
-  }
-});
+import ProfileScreen from './components/screens/Profile';
 
 const MainNavigator = StackNavigator({
   home: {

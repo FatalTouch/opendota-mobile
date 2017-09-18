@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 
 const apiUrl = 'https://api.opendota.com/api/';
 
@@ -16,6 +17,12 @@ class Api {
     console.log(accountId, page);
     const offset = page * matchLimit;
     return fetchFromApi(`players/${accountId}/matches?limit=${matchLimit}&offset=${offset}`);
+  };
+
+  getSummary = (accountId) => {
+    const stats = fetchFromApi(`players/${accountId}`);
+    const wl = fetchFromApi(`players/${accountId}/wl`);
+    return Promise.all([stats, wl]).then(() => _.merge(wl, stats));
   };
 }
 
