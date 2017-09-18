@@ -14,7 +14,6 @@ class Api {
   // getRecentMatches = accountId => fetchFromApi(`players/${accountId}/matches?limit=${matchLimit}`);
 
   getMatches = (accountId, page) => {
-    console.log(accountId, page);
     const offset = page * matchLimit;
     return fetchFromApi(`players/${accountId}/matches?limit=${matchLimit}&offset=${offset}`);
   };
@@ -24,6 +23,8 @@ class Api {
     const wl = fetchFromApi(`players/${accountId}/wl`);
     return Promise.all([stats, wl]).then(() => _.merge(wl, stats));
   };
+
+  getHeroes = accountId => (fetchFromApi(`players/${accountId}/heroes`));
 }
 
 
